@@ -1,5 +1,5 @@
 ﻿var vLaboralApp = angular.module('vLaboralApp', ['ngResource', 'ngMdIcons', 'ui.router', 'ngCookies', 'ngTable',
-  'ngSanitize', 'ngAnimate', 'ngAria', 'ct.ui.router.extras', 'angular-loading-bar', 'daypilot', 'LocalStorageModule', 'angular-jwt', 'ngMaterial', 
+  'ngSanitize', 'ngAnimate', 'ngAria', 'ct.ui.router.extras', 'angular-loading-bar', 'LocalStorageModule', 'angular-jwt', 'ngMaterial', 
   'oc.lazyLoad', 'ng-mfb', 'ngAutocomplete', 'angular-input-stars', 'ngFileUpload'])
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider, $stickyStateProvider, cfpLoadingBarProvider) {
 
@@ -11,12 +11,29 @@
 
         $stateProvider //fpaz: defino los states que van a guiar el ruteo de las vistas parciales de la app       
 
-            //#region Home
+            //#region Home            
             .state('home', {
                 url: '/home',
                 templateUrl: '/App/Home/Partials/home.html',
-                controller: ''                
-            })            
+                controller: ''
+            })
+            //.state('home', {
+            //    url: "/Home",
+            //    views: {
+            //        'menuHome': {
+            //            templateUrl: '/Scripts/App/Partials/Header.html',
+            //            controller: ''
+            //        },
+            //        'infoHome': {
+            //            templateUrl: '/Scripts/App/Partials/Menu.html',
+            //            controller: ''
+            //        },
+            //        'ofertasHome': {
+            //            templateUrl: '/Scripts/App/Partials/Dashboard.html',
+            //            controller: ''                        
+            //        }
+            //    }
+            //})
 
             //#endregion
 
@@ -69,40 +86,40 @@
         //#endregion          
 
             //#region Empleador
-            //.state('empleador', {
-            //    abstract: true,
-            //    url: '/empleador',
-            //    views: {
-            //        '': {
-            //            templateUrl: 'views/layout.html'
-            //        },
-            //        'aside': {
-            //            templateUrl: 'views/aside.html'
-            //        },
-            //        'content': {
-            //            templateUrl: 'views/content.html'
-            //        }
-            //    }
-            //})
-            //.state('empleador.info', {
-            //    url: '/info',
-            //    templateUrl: '/App/Empleador/Partials/empleadorInfo.html',
-            //    controller: 'empleadorCtrl',
-            //    data: { title: 'Info Empleador' },
-            //    resolve: {
-            //        empleadorDataFactory: 'empleadorDataFactory',
-            //        infoEmpleador: function (empleadorDataFactory, authSvc) {                      
-            //            //return authSvc.authentication.empleadorId;
-            //            return empleadorDataFactory.getEmpleador(1);
-            //        },
-            //        listadoEmpleadores: function (empleadorDataFactory) {
-            //            return { value: [] };
-            //        },
-            //        loadEmpleadorCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
-            //            return $ocLazyLoad.load(['App/Empleador/empleadorCtrl.js', 'App/Empleador/empleadorDataFactory.js']);
-            //        }]                  
-            //    }
-            //})
+            .state('empleador', {
+                abstract: true,
+                url: '/empleador',
+                views: {
+                    '': {
+                        templateUrl: 'views/layout.html'
+                    },
+                    'aside': {
+                        templateUrl: 'views/aside.html'
+                    },
+                    'content': {
+                        templateUrl: 'views/content.html'
+                    }
+                }
+            })
+            .state('empleador.info', {
+                url: '/info',
+                templateUrl: '/App/Empleador/Partials/empleadorInfo.html',
+                controller: 'empleadorCtrl',
+                data: { title: 'Info Empleador' },
+                resolve: {
+                    empleadorDataFactory: 'empleadorDataFactory',
+                    infoEmpleador: function (empleadorDataFactory, authSvc) {                      
+                        //return authSvc.authentication.empleadorId;
+                        return empleadorDataFactory.getEmpleador(1);
+                    },
+                    listadoEmpleadores: function (empleadorDataFactory) {
+                        return { value: [] };
+                    },
+                    loadEmpleadorCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        return $ocLazyLoad.load(['App/Empleador/empleadorCtrl.js', 'App/Empleador/empleadorDataFactory.js']);
+                    }]                  
+                }
+            })
             //.state('empleador.add', {
             //    url: '/add',
             //    templateUrl: '/App/Empleador/Partials/empleadorAdd.html',
